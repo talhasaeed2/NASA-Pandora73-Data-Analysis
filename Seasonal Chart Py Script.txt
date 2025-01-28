@@ -1,0 +1,33 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# ... (other code remains unchanged, including the data loading and function definitions) ...
+
+# Plotting for Pandora Tropo NO2 with seaborn style
+plt.figure(figsize=(14, 7))
+for season_year, color in color_mapping.items():
+    season_data = data[data['SeasonYear'] == season_year]
+    plt.plot(season_data['Date'], season_data['Pandora Tropo NO2'], label=season_year, color=color, linewidth=2)
+
+# Adjust date format on x-axis
+plt.gca().xaxis.set_major_formatter(plt.matplotlib.dates.DateFormatter('%d %b %Y'))
+
+# Adding labels and updated title for Pandora Tropo NO2
+plt.title('Seasonal Variation of Pandora Tropo NO2', fontsize=14)
+plt.xlabel('Date', fontsize=12)
+plt.ylabel('Tropospheric NO2 Column Densities (Molecules/cm^2)', fontsize=12)
+
+# Add a legend outside of the plot
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+
+# Further customize the plot for better aesthetics
+sns.despine(left=True, bottom=True)
+plt.tight_layout()
+
+# Save the figure again with the changes
+pandora_graph_filename = '/mnt/data/pandora_trop_no2_seasonal_plot.png'
+plt.savefig(pandora_graph_filename)
+
+# Show the plot
+plt.show()
